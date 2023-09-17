@@ -1,0 +1,13 @@
+- name: Start deployment
+  debug:
+    msg: "Version {{ semaphore_vars.task_details.incoming_version }} is installed."
+
+
+- name: Emulate long process
+  ansible.builtin.pause:
+    seconds: 5
+
+
+- name: Finish deployment
+  debug:
+    msg: "Version {{ semaphore_vars.task_details.incoming_version }} is installed."
