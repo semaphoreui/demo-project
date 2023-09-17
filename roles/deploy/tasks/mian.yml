@@ -1,13 +1,12 @@
-- name: Start deployment
-  debug:
-    msg: "Version {{ semaphore_vars.task_details.incoming_version }} is installed."
+# - name: Read secrets
+#   include:
 
 
-- name: Emulate long process
+- name: Install artifact and create configuration files
   ansible.builtin.pause:
     seconds: 5
 
 
-- name: Finish deployment
+- name: Print installed version
   debug:
-    msg: "Version {{ semaphore_vars.task_details.incoming_version }} is installed."
+    msg: "Version {{ semaphore_vars.task_details.incoming_version }} was installed."
