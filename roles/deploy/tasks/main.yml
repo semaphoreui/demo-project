@@ -9,4 +9,4 @@
 
 - name: Print installed version
   debug:
-    msg: "Version {{ semaphore_vars.task_details.incoming_version }} was installed."
+    msg: "Version {{ semaphore_vars.task_details }} was installed."
