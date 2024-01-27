@@ -1,1 +1,4 @@
 - name: Ping site
+  shell: ping -c 1 -w 2 google.com
+  delegate_to: localhost
+  ignore_errors: true
