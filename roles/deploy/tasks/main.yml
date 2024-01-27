@@ -1,6 +1,3 @@
-# - name: Read secrets
-#   include:
-
 
 - name: Install artifact and create configuration files
   ansible.builtin.pause:
