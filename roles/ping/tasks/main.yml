@@ -4,4 +4,4 @@
 
 - name: Ping result
   debug:
-    msg: "{{ ping_result }}"
+    msg: "{{ ping_result.stdout_lines }}"
