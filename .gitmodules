@@ -1,3 +1,3 @@
-[submodule "roles/ping"]
-	path = roles/ping
+[submodule "ansible/roles/ping"]
+	path = ansible/roles/ping
 	url = https://github.com/semaphoreui/demo-project-ping-role.git
