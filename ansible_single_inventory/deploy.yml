@@ -1,0 +1,6 @@
+- hosts: site
+  roles:
+  - deploy
+
+
+  

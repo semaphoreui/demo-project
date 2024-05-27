@@ -1,0 +1,5 @@
+- name: install htop
+  package:
+    name: htop
+    state: present
+  become: True

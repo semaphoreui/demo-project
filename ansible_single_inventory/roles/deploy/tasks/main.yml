@@ -1,0 +1,9 @@
+
+- name: Install artifact and create configuration files
+  ansible.builtin.pause:
+    seconds: 5
+
+
+- name: Print installed version
+  debug:
+    msg: "Version {{ semaphore_vars.task_details }} was installed."
