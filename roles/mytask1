@@ -1,0 +1,4 @@
+- name: Debug Message
+  debug:
+    msg: "This is my test task"
+    
