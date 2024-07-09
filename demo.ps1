@@ -6,13 +6,13 @@ function Print-Table {
     )
 
     # Set colors
-    $HeaderColor = "White"
+    $HeaderColor = "Red"
     $RowColor = "White"
 
     # Print headers
     $HeaderLine = ""
     foreach ($header in $Headers) {
-        $HeaderLine += "{0,-20}" -f $header
+        $HeaderLine += "{0,-40}" -f $header
     }
     Write-Host $HeaderLine -ForegroundColor $HeaderColor
 
@@ -20,18 +20,32 @@ function Print-Table {
     foreach ($row in $Rows) {
         $RowLine = ""
         foreach ($cell in $row) {
-            $RowLine += "{0,-20}" -f $cell
+            $RowLine += "{0,-40}" -f $cell
         }
         Write-Host $RowLine -ForegroundColor $RowColor
     }
 }
 
-# Example headers and rows
-$headers = @("Name", "Age", "City")
+# Gather system statistics
+$cpu = Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty LoadPercentage
+$memory = Get-WmiObject -Class Win32_OperatingSystem
+$totalMemory = [math]::Round($memory.TotalVisibleMemorySize / 1MB, 2)
+$freeMemory = [math]::Round($memory.FreePhysicalMemory / 1MB, 2)
+$usedMemory = $totalMemory - $freeMemory
+$disk = Get-WmiObject -Class Win32_LogicalDisk -Filter "DriveType=3"
+$diskStats = @()
+foreach ($d in $disk) {
+    $diskStats += @($d.DeviceID, [math]::Round($d.Size / 1GB, 2), [math]::Round($d.FreeSpace / 1GB, 2))
+}
+
+# Create table data
+$headers = @("Metric", "Value")
 $rows = @(
-    @("Alice", "30", "New York"),
-    @("Bob", "25", "Los Angeles"),
-    @("Charlie", "35", "Chicago")
+    @("CPU Usage (%)", "$cpu%"),
+    @("Total Memory (GB)", "$totalMemory GB"),
+    @("Used Memory (GB)", "$usedMemory GB"),
+    @("Free Memory (GB)", "$freeMemory GB"),
+    @("Disk $($diskStats[0]) Total (GB)", "$($diskStats[1]) GB")
 )
 
 # Print the table
