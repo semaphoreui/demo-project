@@ -38,6 +38,7 @@ foreach ($d in $disk) {
     $diskStats += @($d.DeviceID, [math]::Round($d.Size / 1GB, 2), [math]::Round($d.FreeSpace / 1GB, 2))
 }
 
+Write-Output "-------------- System Statistics --------------"
 # Create table data
 $headers = @("Metric", "Value")
 $rows = @(
