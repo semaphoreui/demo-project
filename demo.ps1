@@ -1,42 +1,38 @@
-# Define colors
-$HeaderColor = "Cyan"
-$BoldColor = "Yellow"
-$CodeColor = "Green"
-$DefaultColor = "White"
-
-# Function to print colored text
-function Write-ColoredText {
+# Function to print a table with colored headers
+function Print-Table {
     param (
-        [string]$Text,
-        [string]$Color
+        [string[]]$Headers,
+        [string[][]]$Rows
     )
-    Write-Host $Text -ForegroundColor $Color
-}
 
-# Read the Markdown file
-$MarkdownFile = ".\file.md"
-$Content = Get-Content $MarkdownFile
+    # Set colors
+    $HeaderColor = "White"
+    $RowColor = "White"
 
-# Process each line
-foreach ($line in $Content) {
-    if ($line -match '^# ') {
-        # Header level 1
-        Write-ColoredText $line $HeaderColor
-    } elseif ($line -match '^## ') {
-        # Header level 2
-        Write-ColoredText $line $HeaderColor
-    } elseif ($line -match '^### ') {
-        # Header level 3
-        Write-ColoredText $line $HeaderColor
-    } elseif ($line -match '\*\*(.+?)\*\*') {
-        # Bold text
-        $boldText = $line -replace '\*\*(.+?)\*\*', "$1"
-        Write-ColoredText $boldText $BoldColor
-    } elseif ($line -match '```') {
-        # Code block
-        Write-ColoredText $line $CodeColor
-    } else {
-        # Default text
-        Write-ColoredText $line $DefaultColor
+    # Print headers
+    $HeaderLine = ""
+    foreach ($header in $Headers) {
+        $HeaderLine += "{0,-20}" -f $header
+    }
+    Write-Host $HeaderLine -ForegroundColor $HeaderColor
+
+    # Print rows
+    foreach ($row in $Rows) {
+        $RowLine = ""
+        foreach ($cell in $row) {
+            $RowLine += "{0,-20}" -f $cell
+        }
+        Write-Host $RowLine -ForegroundColor $RowColor
     }
 }
+
+# Example headers and rows
+$headers = @("Name", "Age", "City")
+$rows = @(
+    @("Alice", "30", "New York"),
+    @("Bob", "25", "Los Angeles"),
+    @("Charlie", "35", "Chicago")
+)
+
+# Print the table
+Print-Table -Headers $headers -Rows $rows
