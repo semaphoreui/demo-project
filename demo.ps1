@@ -49,5 +49,5 @@ $rows = @(
     @("Disk $($diskStats[0]) Total (GB)", "$($diskStats[1]) GB")
 )
 
-# Print the table
+# Print the table (test)
 Print-Table -Headers $headers -Rows $rows
