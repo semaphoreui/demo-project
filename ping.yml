@@ -1,3 +1,4 @@
-- hosts: site
-  roles:
-  - ping
+- hosts: localhost
+  tasks:
+    - name: Ping 本地测试
+      ansible.builtin.ping:
